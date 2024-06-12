@@ -2,14 +2,14 @@ const t1 = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       reject("t1 success");
-    }, 1000);
+    }, 100);
   });
 };
 
 const t2 = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve("t2 success");
+      reject("t2 success");
     }, 500);
   });
 };
@@ -51,10 +51,11 @@ Promise.myAny = function (promiseArr) {
   });
 };
 
-Promise.myAny([t1(), t2(), t3()])
+Promise.any([t1(), t2(), t3()])
   .then((res) => {
-    console.log(`Response is ${res}`);
+    console.log(res);
   })
   .catch((err) => {
     console.error(err);
+    console.log(err.erros);
   });

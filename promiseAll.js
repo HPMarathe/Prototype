@@ -33,11 +33,11 @@ Promise.myAll = function (promiseArr) {
 
     const results = [];
     if (n === 0) {
-      resolve(results);
+      resolve("Empty Array");
       return;
     }
 
-    promiseArr.forEach(async (promise, index) => {
+    promiseArr.forEach((promise, index) => {
       Promise.resolve(promise).then((res) => {
         results[index] = res;
         n--;

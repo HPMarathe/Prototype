@@ -2,7 +2,7 @@ const t1 = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       reject("t1 success");
-    }, 1000);
+    }, 100);
   });
 };
 
@@ -22,6 +22,19 @@ const t3 = () => {
   });
 };
 
+// Promise.myRace = function (promiseArr) {
+//   return new Promise((resolve, reject) => {
+//     if (!Array.isArray(promiseArr)) {
+//       reject(new Error("PromiseArr is not array"));
+//       return;
+//     }
+
+//     for (let promise of promiseArr) {
+//       Promise.resolve(promise).then(resolve, reject);
+//     }
+//   });
+// };
+
 Promise.myRace = function (promiseArr) {
   return new Promise((resolve, reject) => {
     if (!Array.isArray(promiseArr)) {
@@ -29,8 +42,8 @@ Promise.myRace = function (promiseArr) {
       return;
     }
 
-    for (let promise of promiseArr) {
-      Promise.resolve(promise).then(resolve, reject);
+    for (let i = 0; i < promiseArr.length; i++) {
+      Promise.resolve(promiseArr[i]).then(resolve, reject);
     }
   });
 };

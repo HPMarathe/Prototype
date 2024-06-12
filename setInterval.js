@@ -1,30 +1,23 @@
-function createSetInterval() {
-  var intervalId = 0;
-  var timerMap = {};
+var intervalId = 0;
+var timerMap = {};
 
-  function setIntervalPolyfill(callback, delay, ...args) {
-    var id = intervalId++;
-    timerMap[id] = true;
+function setIntervalPolyfill(callback, delay, ...args) {
+  var id = intervalId++;
+  timerMap[id] = true;
 
-    function executeInterval() {
-      if (!timerMap[id]) return;
-      callback(...args);
-      setTimeout(executeInterval, delay);
-    }
-
+  function executeInterval() {
+    if (!timerMap[id]) return;
+    callback(...args);
     setTimeout(executeInterval, delay);
-    return id;
   }
 
-  function clearIntervalPoly(id) {
-    delete timerMap[id];
-  }
-
-  return { setIntervalPolyfill, clearIntervalPoly };
+  setTimeout(executeInterval, delay);
+  return id;
 }
 
-// Example usage:
-var { setIntervalPolyfill, clearIntervalPoly } = createSetInterval();
+function clearIntervalPoly(id) {
+  delete timerMap[id];
+}
 
 console.log("Start");
 

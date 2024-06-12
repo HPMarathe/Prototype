@@ -6,6 +6,13 @@ const t1 = () => {
   });
 };
 
+const t4 = () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("t4 succes");
+    }, 1000);
+  });
+};
 const t2 = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -39,14 +46,12 @@ Promise.myAllSettled = function (promiseArr) {
 
     promiseArr.forEach((promise, index) => {
       Promise.resolve(promise)
-        .then(
-          (value) => {
-            results[index] = { status: "fulfilled", value };
-          },
-          (reason) => {
-            results[index] = { status: "rejected", reason };
-          }
-        )
+        .then((value) => {
+          results[index] = { status: "fulfilled", value: value };
+        })
+        .catch((reason) => {
+          results[index] = { status: "rejected", reason: reason };
+        })
         .finally(() => {
           n--;
           if (n === 0) {

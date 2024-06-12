@@ -1,7 +1,7 @@
 const arr = [5, 6, 7, 4, 3, 2, 7];
 
 Array.prototype.myReduce = function (cb, initialVal) {
-  // assign initialVal for acc
+  // assign initialVal for accumulator
   var acc = initialVal;
 
   for (let i = 0; i < this.length; i++) {
@@ -14,6 +14,6 @@ Array.prototype.myReduce = function (cb, initialVal) {
 const reduceArray = arr.myReduce((acc, currVal, i, arr) => {
   //   console.table(acc, currVal, i, arr);
   return acc + currVal;
-}, 10);
+}, 1);
 
 console.log(reduceArray);
