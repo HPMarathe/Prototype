@@ -59,3 +59,5 @@ Promise.any([t1(), t2(), t3()])
     console.error(err);
     console.log(err.erros);
   });
+
+// feature
